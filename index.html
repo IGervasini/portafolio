@@ -6,212 +6,198 @@
 <title>Portafolio - Ignacio Gervasini</title>
 <meta name="description" content="Portafolio profesional de Ignacio Gervasini - C#, .NET 8, JavaScript, HTML, desarrollo de aplicaciones web y empresariales.">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --bg: #0b1020;
   --card: #0f1724;
   --accent: #7dd3fc;
   --muted: #9aa4b2;
-  --glass: rgba(255,255,255,0.04);
 }
 
-* { box-sizing: border-box; }
+/* Reset básico */
+* { box-sizing: border-box; margin:0; padding:0; }
 body {
-  margin:0;
-  font-family: 'Inter', sans-serif;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(125, 211, 252, 0.03), transparent),
-              radial-gradient(1000px 500px at 90% 90%, rgba(99, 102, 241, 0.03), transparent),
-              var(--bg);
-  color: #e6eef6;
-  padding: 32px;
+  font-family:'Inter', sans-serif;
+  background: var(--bg);
+  color:#e6eef6;
   line-height:1.6;
+  overflow-x:hidden;
 }
 
-.code-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.12;
-  mix-blend-mode: screen;
-  background-image: linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
-                    linear-gradient(180deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-  filter: blur(0.6px);
-  animation: moveGrid 20s linear infinite;
+/* Fondo de partículas */
+#particles {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+  background:transparent;
 }
 
-@keyframes moveGrid {
-  from { background-position: 0 0, 10px 10px; }
-  to { background-position: 20px 20px, 30px 30px; }
-}
-
+/* Container principal */
 .container {
   position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width:1000px;
+  margin:0 auto;
+  padding:24px;
   z-index:1;
 }
 
+/* Header */
 .header {
-  text-align: center;
-  margin-bottom: 32px;
+  text-align:center;
+  margin-bottom:40px;
+  opacity:0;
+  transform:translateY(30px);
+  animation: fadeUp 1s forwards;
 }
+.header h1 { font-size:36px; }
+.header h2 { font-weight:400; color:var(--muted); margin:8px 0 16px; font-size:18px; }
+.header p { max-width:700px; margin:0 auto; color:var(--muted); font-size:15px; }
+.contact { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:16px; }
+.contact a { display:flex; align-items:center; gap:6px; font-size:14px; color:var(--accent); text-decoration:none; padding:6px 12px; border-radius:8px; background: rgba(125,211,252,0.08); transition:0.3s; }
+.contact a:hover { background: rgba(125,211,252,0.2); transform:translateY(-2px); }
 
-.header h1 {
-  margin:0;
-  font-size:32px;
-}
+/* Main */
+.main { display:flex; gap:32px; flex-wrap:wrap; justify-content:center; align-items:flex-start; margin-top:32px; }
 
-.header h2 {
-  margin:4px 0 12px;
-  font-weight:400;
-  color: var(--muted);
-}
-
-.header p {
-  color: var(--muted);
-  font-size:15px;
-  max-width:700px;
-  margin:12px auto;
-}
-
-.contact {
-  display:flex;
-  justify-content:center;
-  gap:24px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-
-.contact a {
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-size:14px;
-  color: var(--accent);
-  text-decoration:none;
-  padding:4px 8px;
-  border-radius:6px;
-  background: rgba(125,211,252,0.08);
-  transition: background 0.3s;
-}
-
-.contact a:hover {
-  background: rgba(125,211,252,0.2);
-}
-
-.contact a svg {
-  width:16px;
-  height:16px;
-}
-
-.main {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
+/* Avatar con parallax */
 .avatar {
-  flex:0 0 180px;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow: 0 8px 28px rgba(2,6,23,0.6);
+  max-width:200px; width:100%; border-radius:16px; overflow:hidden; box-shadow:0 12px 36px rgba(2,6,23,0.6);
+  transition: transform 0.5s;
 }
+.avatar img { width:100%; height:auto; display:block; border-radius:16px; }
+.avatar:hover { transform:scale(1.05); }
 
-.avatar img {
-  width:100%;
-  display:block;
-}
-
-.projects {
-  flex:1;
-  display:grid;
-  grid-template-columns: 1fr;
-  gap:16px;
-}
-
+/* Projects */
+.projects { flex:1; display:grid; grid-template-columns:1fr; gap:20px; }
 .project {
   background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.03));
-  border-radius:10px;
-  padding:16px;
-  border:1px solid rgba(255,255,255,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius:12px; padding:20px; border:1px solid rgba(255,255,255,0.05);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity:0; transform:translateY(20px);
+  animation: fadeUp 0.6s forwards;
 }
+.project:nth-child(1){ animation-delay:0.2s; }
+.project:nth-child(2){ animation-delay:0.4s; }
+.project:hover{ transform:translateY(-6px) scale(1.02); box-shadow:0 10px 28px rgba(2,6,23,0.6); }
+.project a{ color:var(--accent); text-decoration:none; font-weight:500; }
+.project a:hover{ text-decoration:underline; }
 
-.project:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(2,6,23,0.6); }
-.project a { color: var(--accent); text-decoration:none; font-weight:500; }
-.project a:hover { text-decoration:underline; }
+/* Footer */
+footer { text-align:center; margin-top:40px; color:var(--muted); font-size:13px; opacity:0.8; }
 
-footer {
-  margin-top:32px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-  opacity:0.8;
-}
+/* Animaciones */
+@keyframes fadeUp{ to{ opacity:1; transform:translateY(0); } }
 
+/* Responsive */
 @media(max-width:768px){
-  .main {
-    flex-direction:column;
-    align-items:center;
-  }
-  .projects { width:100%; }
+  .main{ flex-direction:column; align-items:center; gap:24px; }
+  .projects{ width:100%; }
+  .header h1{ font-size:28px; }
+  .header h2{ font-size:16px; }
+  .header p{ font-size:14px; }
+  .avatar{ max-width:250px; }
 }
 </style>
 </head>
 <body>
-<div class="code-bg" aria-hidden="true"></div>
+
+<!-- Partículas flotantes -->
+<canvas id="particles"></canvas>
 
 <div class="container">
   <div class="header">
     <h1>Ignacio Gervasini</h1>
     <h2>Desarrollador Full Stack — Estudiante de Analista en TI</h2>
-    <p>
-      Soy estudiante de <strong>Analista en Tecnologías de la Información</strong> en la Universidad ORT.  
-      Me apasiona el desarrollo de software y actualmente me enfoco en aplicaciones web y móviles usando C#, .NET 8, JavaScript y HTML/CSS.  
-      Busco mi primera experiencia laboral en el área de desarrollo, donde pueda aprender y aportar valor a un equipo.
-    </p>
+    <p>Soy estudiante de <strong>Analista en Tecnologías de la Información</strong> en la Universidad ORT. Me apasiona el desarrollo de software y actualmente me enfoco en aplicaciones web y móviles usando C#, .NET 8, JavaScript y HTML/CSS. Busco mi primera experiencia laboral en el área de desarrollo, donde pueda aprender y aportar valor a un equipo.</p>
     <div class="contact">
-      <a href="mailto:ignaciogervasiniyt@gmail.com">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        ignaciogervasiniyt@gmail.com
-      </a>
-      <a href="tel:+59893581680">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.55.57 1 1 0 011 1v3.25a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1h3.25a1 1 0 011 1c.04 1.27.23 2.52.57 3.55a1 1 0 01-.21 1.11l-2.2 2.2z"/></svg>
-        093 581 680
-      </a>
-      <a href="https://www.linkedin.com/in/ignacio-gervasini-cabrera-906222263" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.27h-3v-5.5c0-1.31-.02-2.99-1.82-2.99-1.82 0-2.1 1.42-2.1 2.89v5.6h-3v-10h2.88v1.36h.04c.4-.75 1.37-1.54 2.82-1.54 3.01 0 3.56 1.98 3.56 4.56v5.62z"/></svg>
-        LinkedIn
-      </a>
+      <a href="mailto:ignaciogervasiniyt@gmail.com">✉ Email</a>
+      <a href="tel:+59893581680">📞 Teléfono</a>
+      <a href="https://www.linkedin.com/in/ignacio-gervasini-cabrera-906222263" target="_blank">LinkedIn</a>
     </div>
   </div>
 
   <div class="main">
     <div class="avatar">
-        <img src="IgnacioGervasini.png" alt="Ignacio Gervasini">
+      <img src="IgnacioGervasini.png" alt="Ignacio Gervasini">
     </div>
-
     <div class="projects">
       <div class="project">
         <strong>💼 Sistema de Gestión de Pagos</strong>
-        <p style="color:var(--muted);font-size:13px;margin:6px 0">
-          Aplicación empresarial para gestión de pagos con autenticación por roles (Administrador, Gerente, Empleado). Permite control seguro y seguimiento de operaciones.
-        </p>
+        <p>Aplicación empresarial para gestión de pagos con autenticación por roles (Administrador, Gerente, Empleado). Permite control seguro y seguimiento de operaciones.</p>
         <a href="https://github.com/Prog-P3-2025-2/Obligatorio-287431-325522" target="_blank">Ver en GitHub →</a>
       </div>
-
       <div class="project">
         <strong>🌐 Aplicación con Consumo de API</strong>
-        <p style="color:var(--muted);font-size:13px;margin:6px 0">
-          Plataforma con registro, login y visualización de usuarios por país. Consume servicios API externos y muestra datos dinámicos en tiempo real.
-        </p>
+        <p>Plataforma con registro, login y visualización de usuarios por país. Consume servicios API externos y muestra datos dinámicos en tiempo real.</p>
         <a href="https://github.com/IGervasini/Aplicacion-con-consumo-de-API" target="_blank">Ver en GitHub →</a>
       </div>
     </div>
   </div>
 
   <footer>
-    © 2025 Ignacio Gervasini — Este sitio está alojado en <code>GitHub Pages</c
+    © 2025 Ignacio Gervasini — Este sitio está alojado en <code>GitHub Pages</code>
+  </footer>
+</div>
+
+<script>
+// Partículas simples
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particlesArray;
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+class Particle {
+  constructor(){
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random()*3 + 1;
+    this.speedX = (Math.random()-0.5)*0.5;
+    this.speedY = (Math.random()-0.5)*0.5;
+  }
+  update(){
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if(this.x <0 || this.x>canvas.width) this.speedX*=-1;
+    if(this.y<0 || this.y>canvas.height) this.speedY*=-1;
+  }
+  draw(){
+    ctx.fillStyle = 'rgba(125,211,252,0.4)';
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+
+function init(){
+  particlesArray=[];
+  for(let i=0;i<100;i++){
+    particlesArray.push(new Particle());
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particlesArray.forEach(p=>{ p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+
+init();
+animate();
+
+window.addEventListener('resize',()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  init();
+});
+</script>
+
+</body>
+</html>
